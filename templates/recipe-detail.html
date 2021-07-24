@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+					<!-- Content -->
+					<section>
+						<header class="main">
+							<h1>{{ recipe.title }}</h1>
+						</header>
+
+						<span class="image main"><img src="{{ recipe.get_image }}" style="width: auto; height: auto;" alt="" /></span>
+						<p>Posted: {{ recipe.created }}</p>
+						<p>Cooking: {{ recipe.cooking_time }}</p>
+
+						<hr class="major" />
+						{% for image in images %}
+						<img src="{{ image }}" style="width: 300px; height: 250px;" class="img-thumbnail" alt="...">
+						{% endfor %}
+
+						<h2>{{ recipe.description|truncatewords:1 }}</h2>
+						<p>{{ recipe.description }}</p>
+													<form action="" method="post">
+								{% csrf_token %}
+								{{ form }}
+								<input class="btn btn-primary" type="submit" value="Submit">
+							</form>
+
+						{% for comment in recipe.comments.all %}
+						{{comment.text}}
+						{{comment.user}}
+						{{comment.created_at}}
+
+						{% endfor %}
+						<a href="{% url 'update-recipe' recipe.id %}"><i class="fas fa-edit"></i></a>
+						<a href="{% url 'delete-recipe' recipe.id %}"><i class="fas fa-trash"></i>
+
+					</section>
+{% endblock %}
