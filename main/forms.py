@@ -18,21 +18,23 @@ class RecipeForm(forms.ModelForm):
 
 
 class ImageForm(forms.ModelForm):
-
     class Meta:
         model = Image
         fields = ('image', )
 
 
 class CommentForm(forms.ModelForm):
-
     class Meta:
         model = Comment
         fields = ('text', )
 
 
 class UserRegistrationForm(forms.ModelForm):
-
     class Meta:
         model = get_user_model()
         fields = ('email', 'password', 'username')
+
+
+class AuthorizationForm(forms.Form):
+    email = forms.EmailField()
+    password = forms.CharField(max_length=100)
